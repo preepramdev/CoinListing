@@ -1,4 +1,4 @@
-package com.maxnimal.coin.listing.presentation.coin.tobrank
+package com.maxnimal.coin.listing.presentation.coin.toprank
 
 import android.content.Context
 import android.util.AttributeSet
