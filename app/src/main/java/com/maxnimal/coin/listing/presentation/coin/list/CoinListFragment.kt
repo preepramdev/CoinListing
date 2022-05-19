@@ -8,10 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.maxnimal.coin.listing.R
 import com.maxnimal.coin.listing.databinding.FragmentCoinListBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CoinListFragment : Fragment() {
 
     private val binding by lazy { FragmentCoinListBinding.inflate(layoutInflater) }
+    private val viewModel: CoinListViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,6 +27,7 @@ class CoinListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
+        viewModel.getCoins()
     }
 
     private fun initView() = with(binding){
