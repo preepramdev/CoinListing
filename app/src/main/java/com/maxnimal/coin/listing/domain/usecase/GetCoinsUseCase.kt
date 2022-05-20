@@ -19,7 +19,7 @@ class GetCoinsUseCaseImpl(
 
     companion object {
         private const val STATUS_SUCCESS = "success"
-        private const val LIMIT = 10
+        private const val LIMIT = 20
         private const val OFFSET = 0
     }
 
@@ -38,10 +38,16 @@ class GetCoinsUseCaseImpl(
         return coins?.let { _coins ->
             _coins.map { coin ->
                 CoinModel(
-                    uuid = coin.uuid,
-                    symbol = coin.symbol,
-                    name = coin.name,
-                    iconUrl = coin.iconUrl
+                    uuid = coin.uuid.orEmpty(),
+                    symbol = coin.symbol.orEmpty(),
+                    name = coin.name.orEmpty(),
+                    iconUrl = coin.iconUrl.orEmpty(),
+                    color = coin.color.orEmpty(),
+                    description = "",
+                    websiteUrl = "",
+                    price = coin.price?.toDouble() ?: 0.0,
+                    change = coin.change?.toDouble() ?: 0.0,
+                    marketCap = coin.marketCap.orEmpty()
                 )
             }
         } ?: run {

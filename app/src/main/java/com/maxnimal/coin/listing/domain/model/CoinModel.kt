@@ -8,6 +8,7 @@ data class CoinModel(
     val color: String,
     val description: String,
     val websiteUrl: String,
-    val price: String,
+    val price: Double,
+    val change: Double,
     val marketCap: String,
 )

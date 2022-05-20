@@ -1,5 +1,6 @@
 package com.maxnimal.coin.listing.presentation.coin.list.adapter
 
+import android.graphics.Color
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,10 +12,11 @@ import coil.request.ImageRequest
 import com.maxnimal.coin.listing.databinding.ItemCoinBinding
 import com.maxnimal.coin.listing.domain.model.CoinModel
 import com.maxnimal.coin.listing.presentation.extension.loadImageFromUrl
+import java.text.DecimalFormat
 
 class CoinItemAdapter : RecyclerView.Adapter<CoinItemAdapter.CoinItemViewHolder>() {
 
-    private val coinModelList = mutableListOf<CoinModel>()
+    private var coinModelList = mutableListOf<CoinModel>()
 
     var onCoinItemClick: ((CoinModel) -> Unit)? = null
 
@@ -22,6 +24,11 @@ class CoinItemAdapter : RecyclerView.Adapter<CoinItemAdapter.CoinItemViewHolder>
         this.coinModelList.addAll(coinModelList)
         notifyDataSetChanged()
     }
+
+    /*fun updateList(coinModelList: List<CoinModel>) {
+        this.coinModelList = coinModelList.toMutableList()
+        notifyDataSetChanged()
+    }*/
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinItemViewHolder {
         val binding = ItemCoinBinding.inflate(
@@ -50,6 +57,22 @@ class CoinItemAdapter : RecyclerView.Adapter<CoinItemAdapter.CoinItemViewHolder>
             tvCoinName.text = coin.name
             tvCoinSymbol.text = coin.symbol
             ivCoinIcon.loadImageFromUrl(coin.iconUrl)
+            tvCoinPrice.apply {
+                val dec = DecimalFormat("#,##0.0000")
+                val price = dec.format(coin.price)
+                text = "$ $price"
+            }
+            tvCoinChange.apply {
+                val dec = DecimalFormat("#,##0.00")
+                val change = dec.format(coin.change)
+                val textColor = if (coin.change > 0.0) {
+                    "#13BC24"
+                } else {
+                    "#F82D2D"
+                }
+                text = change.replace("-", "")
+                setTextColor(Color.parseColor(textColor))
+            }
         }
     }
 }

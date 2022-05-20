@@ -35,15 +35,16 @@ class GetCoinUseCaseImpl(
     private fun mapToCoinModel(coin: GetCoinResponse.Coin?): CoinModel? {
         return coin?.let { _coin ->
             CoinModel(
-                uuid = _coin.uuid,
-                symbol = _coin.symbol,
-                name = _coin.name,
-                iconUrl = _coin.iconUrl,
-                color = _coin.color,
-                description = _coin.description,
-                price = _coin.price,
-                marketCap = _coin.marketCap,
-                websiteUrl = _coin.websiteUrl
+                uuid = _coin.uuid.orEmpty(),
+                symbol = _coin.symbol.orEmpty(),
+                name = _coin.name.orEmpty(),
+                iconUrl = _coin.iconUrl.orEmpty(),
+                color = _coin.color.orEmpty(),
+                description = _coin.description.orEmpty(),
+                price = coin.price?.toDouble() ?: 0.0,
+                change = coin.change?.toDouble() ?: 0.0,
+                marketCap = _coin.marketCap.orEmpty(),
+                websiteUrl = _coin.websiteUrl.orEmpty()
             )
         } ?: run {
             null
