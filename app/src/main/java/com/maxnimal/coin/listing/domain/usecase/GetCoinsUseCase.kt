@@ -43,7 +43,10 @@ class GetCoinsUseCaseImpl(
             Log.e("TAG", "mapToCoinModelList: ${coins.size}")
             _coins.map { coin ->
                 CoinModel(
-                    uuid = coin.uuid
+                    uuid = coin.uuid,
+                    symbol = coin.symbol,
+                    name = coin.name,
+                    iconUrl = coin.iconUrl
                 )
             }
         } ?: run {

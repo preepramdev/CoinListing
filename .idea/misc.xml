@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1703125" />
         <entry key="app/src/main/res/layout/bottom_sheet_coin_detail.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/layout/fragment_coin_list.xml" value="0.33229166666666665" />
+        <entry key="app/src/main/res/layout/item_coin.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/layout/widget_top_rank_coins.xml" value="0.33229166666666665" />
       </map>
     </option>

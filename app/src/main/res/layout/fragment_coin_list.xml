@@ -5,15 +5,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_coin_list">
 
-    <Button
-        android:id="@+id/btn_open"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="open"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+   <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/rv_coin_list"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
