@@ -42,7 +42,8 @@ class GetCoinUseCaseImpl(
                 color = _coin.color,
                 description = _coin.description,
                 price = _coin.price,
-                marketCap = _coin.marketCap
+                marketCap = _coin.marketCap,
+                websiteUrl = _coin.websiteUrl
             )
         } ?: run {
             null
