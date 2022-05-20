@@ -23,10 +23,10 @@ class CoinItemAdapter : RecyclerView.Adapter<CoinItemAdapter.CoinItemViewHolder>
         notifyDataSetChanged()
     }
 
-    /*fun updateList(coinModelList: List<CoinModel>) {
+    fun updateList(coinModelList: List<CoinModel>) {
         this.coinModelList = coinModelList.toMutableList()
         notifyDataSetChanged()
-    }*/
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinItemViewHolder {
         val binding = ItemCoinBinding.inflate(

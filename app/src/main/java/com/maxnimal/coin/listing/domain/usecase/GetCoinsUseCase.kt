@@ -1,6 +1,5 @@
 package com.maxnimal.coin.listing.domain.usecase
 
-import android.util.Log
 import com.maxnimal.coin.listing.data.repository.CoinRepository
 import com.maxnimal.coin.listing.data.source.remote.response.GetCoinsResponse
 import com.maxnimal.coin.listing.domain.model.CoinModel
@@ -10,7 +9,10 @@ import kotlinx.coroutines.flow.flowOf
 
 interface GetCoinsUseCase {
 
-    fun execute(offset: Int): Flow<List<CoinModel>>
+    fun execute(
+        limit: Int,
+        offset: Int
+    ): Flow<List<CoinModel>>
 }
 
 class GetCoinsUseCaseImpl(
@@ -19,12 +21,10 @@ class GetCoinsUseCaseImpl(
 
     companion object {
         private const val STATUS_SUCCESS = "success"
-        private const val LIMIT = 20
-        private const val OFFSET = 0
     }
 
-    override fun execute(offset: Int): Flow<List<CoinModel>> {
-        return coinRepository.getCoins(LIMIT, offset).flatMapConcat { getCoinsResponse ->
+    override fun execute(limit: Int, offset: Int): Flow<List<CoinModel>> {
+        return coinRepository.getCoins(limit, offset).flatMapConcat { getCoinsResponse ->
             if (getCoinsResponse.status == STATUS_SUCCESS) {
                 flowOf(mapToCoinModelList(getCoinsResponse.data?.coins))
             } else {

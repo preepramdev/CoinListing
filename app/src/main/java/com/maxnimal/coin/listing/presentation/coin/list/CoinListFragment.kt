@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,10 @@ import com.maxnimal.coin.listing.R
 import com.maxnimal.coin.listing.databinding.FragmentCoinListBinding
 import com.maxnimal.coin.listing.presentation.coin.detail.CoinDetailBottomSheetFragment
 import com.maxnimal.coin.listing.presentation.coin.list.adapter.CoinItemAdapter
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.supervisorScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CoinListFragment : Fragment() {
@@ -37,6 +42,16 @@ class CoinListFragment : Fragment() {
         initView()
         observeViewModel()
         viewModel.getCoins()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launchWhenResumed {
+            while (isActive) {
+                delay(10000L)
+                viewModel.refreshCoins()
+            }
+        }
     }
 
     private fun initView() = with(binding) {
@@ -67,7 +82,7 @@ class CoinListFragment : Fragment() {
 
     private fun observeViewModel() = with(viewModel) {
         showCoinList.observe(viewLifecycleOwner) { coinModelList ->
-            coinItemAdapter.submitList(coinModelList)
+            coinItemAdapter.updateList(coinModelList)
         }
     }
 }
