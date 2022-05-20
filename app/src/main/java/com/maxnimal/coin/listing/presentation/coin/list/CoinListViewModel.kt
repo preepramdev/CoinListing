@@ -17,15 +17,17 @@ class CoinListViewModel(
 ) : ViewModel() {
 
     private val _showCoinList = MutableLiveData<List<CoinModel>>()
+    private var currentOffset = 0
 
     val showCoinList: LiveData<List<CoinModel>> = _showCoinList
 
     fun getCoins() {
         viewModelScope.launch {
-            getCoinsUseCase.execute().catch { exception ->
+            getCoinsUseCase.execute(currentOffset).catch { exception ->
                 exception.printStackTrace()
             }.collect { coins ->
                 _showCoinList.value = coins
+                currentOffset += coins.size
             }
         }
     }

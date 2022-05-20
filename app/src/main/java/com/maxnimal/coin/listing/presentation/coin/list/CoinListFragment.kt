@@ -52,6 +52,7 @@ class CoinListFragment : Fragment() {
                         val lastPosition = (layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
                         if (childCount - 1 == lastPosition) {
                             Log.e("TAG", "onScrolled: ")
+                            viewModel.getCoins()
                         }
                     }
                 }

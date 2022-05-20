@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.flowOf
 
 interface GetCoinsUseCase {
 
-    fun execute(): Flow<List<CoinModel>>
+    fun execute(offset: Int): Flow<List<CoinModel>>
 }
 
 class GetCoinsUseCaseImpl(
@@ -23,8 +23,8 @@ class GetCoinsUseCaseImpl(
         private const val OFFSET = 0
     }
 
-    override fun execute(): Flow<List<CoinModel>> {
-        return coinRepository.getCoins(LIMIT, OFFSET).flatMapConcat { getCoinsResponse ->
+    override fun execute(offset: Int): Flow<List<CoinModel>> {
+        return coinRepository.getCoins(LIMIT, offset).flatMapConcat { getCoinsResponse ->
             getCoinsResponse?.let { _getCoinsResponse ->
                 if (_getCoinsResponse.status == STATUS_SUCCESS) {
                     flowOf(mapToCoinModelList(_getCoinsResponse.data?.coins))
