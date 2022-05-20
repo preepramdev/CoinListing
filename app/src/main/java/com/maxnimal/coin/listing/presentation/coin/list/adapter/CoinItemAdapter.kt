@@ -12,6 +12,8 @@ class CoinItemAdapter: RecyclerView.Adapter<CoinItemAdapter.CoinItemViewHolder>(
 
     private val coinModelList = mutableListOf<CoinModel>()
 
+    var onCoinItemClick: ((CoinModel) -> Unit)? = null
+
     fun submitList(coinModelList: List<CoinModel>) {
         this.coinModelList.addAll(coinModelList)
         notifyDataSetChanged()
@@ -38,6 +40,9 @@ class CoinItemAdapter: RecyclerView.Adapter<CoinItemAdapter.CoinItemViewHolder>(
     ): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(coin: CoinModel) = with(binding) {
+            root.setOnClickListener {
+                onCoinItemClick?.invoke(coin)
+            }
             tvCoinName.text = coin.name.orEmpty()
             tvCoinSymbol.text = coin.symbol.orEmpty()
             GlideToVectorYou

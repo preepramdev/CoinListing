@@ -16,6 +16,10 @@ class CoinListViewModel(
     private val getCoinsUseCase: GetCoinsUseCase
 ) : ViewModel() {
 
+    // todo current list size
+    // todo current offset
+    // todo auto update every 10 sec
+
     private val _showCoinList = MutableLiveData<List<CoinModel>>()
     private var currentOffset = 0
 

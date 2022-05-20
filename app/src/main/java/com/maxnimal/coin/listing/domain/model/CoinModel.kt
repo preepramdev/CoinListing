@@ -5,4 +5,9 @@ data class CoinModel(
     val symbol: String? = null,
     val name: String? = null,
     val iconUrl: String? = null,
+    val color: String? = null,
+    val description: String? = null,
+    val websiteUrl: String? = null,
+    val price: String? = null,
+    val marketCap: String? = null,
 )

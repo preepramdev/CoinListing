@@ -1,5 +1,6 @@
 package com.maxnimal.coin.listing.data.source.remote
 
+import com.maxnimal.coin.listing.data.source.remote.response.GetCoinResponse
 import com.maxnimal.coin.listing.data.source.remote.response.GetCoinsResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -11,7 +12,7 @@ interface CoinRankingApiService {
     @GET("coin/{uuid}")
     suspend fun getCoin(
         @Path("uuid") uuid: String
-    )
+    ): Response<GetCoinResponse>
 
     @GET("coins")
     suspend fun getCoins(

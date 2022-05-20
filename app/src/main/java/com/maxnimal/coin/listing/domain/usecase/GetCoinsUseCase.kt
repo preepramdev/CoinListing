@@ -25,22 +25,17 @@ class GetCoinsUseCaseImpl(
 
     override fun execute(offset: Int): Flow<List<CoinModel>> {
         return coinRepository.getCoins(LIMIT, offset).flatMapConcat { getCoinsResponse ->
-            getCoinsResponse?.let { _getCoinsResponse ->
-                if (_getCoinsResponse.status == STATUS_SUCCESS) {
-                    flowOf(mapToCoinModelList(_getCoinsResponse.data?.coins))
-                } else {
-                    error("getCoinsResponse fail")
-                }
-
-            } ?: run {
-                error("getCoinsResponse null")
+            if (getCoinsResponse.status == STATUS_SUCCESS) {
+                flowOf(mapToCoinModelList(getCoinsResponse.data?.coins))
+            } else {
+                error("getCoinsResponse fail")
             }
+
         }
     }
 
     private fun mapToCoinModelList(coins: List<GetCoinsResponse.Coin>?): List<CoinModel> {
         return coins?.let { _coins ->
-            Log.e("TAG", "mapToCoinModelList: ${coins.size}")
             _coins.map { coin ->
                 CoinModel(
                     uuid = coin.uuid,
@@ -50,7 +45,6 @@ class GetCoinsUseCaseImpl(
                 )
             }
         } ?: run {
-            Log.e("TAG", "mapToCoinModelList: null")
             listOf()
         }
     }
