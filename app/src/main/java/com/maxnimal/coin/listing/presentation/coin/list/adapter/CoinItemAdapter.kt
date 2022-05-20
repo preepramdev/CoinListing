@@ -39,6 +39,8 @@ class CoinItemAdapter : RecyclerView.Adapter<CoinItemAdapter.CoinItemViewHolder>
         holder.bind(coinModel)
     }
 
+    override fun getItemViewType(position: Int) = CoinListViewType.OTHERS.value
+
     override fun getItemCount(): Int = coinModelList.size
 
     inner class CoinItemViewHolder(
