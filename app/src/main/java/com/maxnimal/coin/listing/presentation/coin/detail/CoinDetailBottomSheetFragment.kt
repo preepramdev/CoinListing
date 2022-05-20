@@ -11,11 +11,12 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.maxnimal.coin.listing.R
 import com.maxnimal.coin.listing.databinding.BottomSheetCoinDetailBinding
 import com.maxnimal.coin.listing.domain.model.CoinModel
+import com.maxnimal.coin.listing.presentation.extension.loadImageFromUrl
+import com.maxnimal.coin.listing.presentation.extension.setTextHtml
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -67,27 +68,19 @@ class CoinDetailBottomSheetFragment : BottomSheetDialogFragment() {
 
     @SuppressLint("SetTextI18n")
     private fun showCoinDetail(coin: CoinModel) = with(binding) {
-        GlideToVectorYou
-            .init()
-            .with(requireContext())
-            .load(Uri.parse(coin.iconUrl), ivCoinIcon)
+        ivCoinIcon.loadImageFromUrl(coin.iconUrl)
         tvCoinName.apply {
             runCatching {
                 Color.parseColor(coin.color)
             }.onSuccess { colorInt ->
                 setTextColor(colorInt)
             }
-            text = coin.name.orEmpty()
+            text = coin.name
         }
-        tvCoinSymbol.text = coin.symbol.orEmpty()
-        tvCoinDetail.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Html.fromHtml(coin.description.orEmpty(), Html.FROM_HTML_MODE_LEGACY)
-        }
-        else {
-            Html.fromHtml(coin.description.orEmpty())
-        }
-        tvCoinPrice.text = "$ ${coin.price.orEmpty()}"
-        tvCoinMarketCap.text = "$ ${coin.marketCap.orEmpty()}"
+        tvCoinSymbol.text = coin.symbol
+        tvCoinDetail.setTextHtml(coin.description)
+        tvCoinPrice.text = "$ ${coin.price}"
+        tvCoinMarketCap.text = "$ ${coin.marketCap}"
         if (!coin.websiteUrl.isNullOrBlank()) {
             layoutGoToWebsite.apply {
                 visibility = View.VISIBLE

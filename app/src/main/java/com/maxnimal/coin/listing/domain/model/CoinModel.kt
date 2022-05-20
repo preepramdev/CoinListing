@@ -1,13 +1,13 @@
 package com.maxnimal.coin.listing.domain.model
 
 data class CoinModel(
-    val uuid: String? = null,
-    val symbol: String? = null,
-    val name: String? = null,
-    val iconUrl: String? = null,
-    val color: String? = null,
-    val description: String? = null,
-    val websiteUrl: String? = null,
-    val price: String? = null,
-    val marketCap: String? = null,
+    val uuid: String,
+    val symbol: String,
+    val name: String,
+    val iconUrl: String,
+    val color: String,
+    val description: String,
+    val websiteUrl: String,
+    val price: String,
+    val marketCap: String,
 )

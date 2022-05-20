@@ -56,8 +56,9 @@ dependencies {
     implementation 'io.insert-koin:koin-androidx-scope:2.2.3'
     implementation 'io.insert-koin:koin-androidx-viewmodel:2.2.3'
 
-    // Glide
-    implementation 'com.github.corouteam:GlideToVectorYou:v2.0.0'
+    // Coil
+    implementation("io.coil-kt:coil:2.1.0")
+    implementation("io.coil-kt:coil-svg:2.1.0")
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

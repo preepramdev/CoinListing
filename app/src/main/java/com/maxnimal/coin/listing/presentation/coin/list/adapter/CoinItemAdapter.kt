@@ -4,11 +4,15 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
+import coil.ImageLoader
+import coil.decode.SvgDecoder
+import coil.load
+import coil.request.ImageRequest
 import com.maxnimal.coin.listing.databinding.ItemCoinBinding
 import com.maxnimal.coin.listing.domain.model.CoinModel
+import com.maxnimal.coin.listing.presentation.extension.loadImageFromUrl
 
-class CoinItemAdapter: RecyclerView.Adapter<CoinItemAdapter.CoinItemViewHolder>() {
+class CoinItemAdapter : RecyclerView.Adapter<CoinItemAdapter.CoinItemViewHolder>() {
 
     private val coinModelList = mutableListOf<CoinModel>()
 
@@ -37,18 +41,15 @@ class CoinItemAdapter: RecyclerView.Adapter<CoinItemAdapter.CoinItemViewHolder>(
 
     inner class CoinItemViewHolder(
         private val binding: ItemCoinBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(coin: CoinModel) = with(binding) {
             root.setOnClickListener {
                 onCoinItemClick?.invoke(coin)
             }
-            tvCoinName.text = coin.name.orEmpty()
-            tvCoinSymbol.text = coin.symbol.orEmpty()
-            GlideToVectorYou
-                .init()
-                .with(binding.root.context)
-                .load(Uri.parse(coin.iconUrl), ivCoinIcon)
+            tvCoinName.text = coin.name
+            tvCoinSymbol.text = coin.symbol
+            ivCoinIcon.loadImageFromUrl(coin.iconUrl)
         }
     }
 }
