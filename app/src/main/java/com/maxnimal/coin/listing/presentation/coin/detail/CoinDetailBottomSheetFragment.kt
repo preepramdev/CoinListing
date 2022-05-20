@@ -18,6 +18,7 @@ import com.maxnimal.coin.listing.domain.model.CoinModel
 import com.maxnimal.coin.listing.presentation.extension.loadImageFromUrl
 import com.maxnimal.coin.listing.presentation.extension.setTextHtml
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.DecimalFormat
 
 
 class CoinDetailBottomSheetFragment : BottomSheetDialogFragment() {
@@ -40,7 +41,7 @@ class CoinDetailBottomSheetFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return binding.root
     }
 
@@ -79,9 +80,13 @@ class CoinDetailBottomSheetFragment : BottomSheetDialogFragment() {
         }
         tvCoinSymbol.text = coin.symbol
         tvCoinDetail.setTextHtml(coin.description)
-        tvCoinPrice.text = "$ ${coin.price}"
+        tvCoinPrice.apply {
+            val dec = DecimalFormat("#,##0.0000")
+            val price = dec.format(coin.price)
+            text = "$$price"
+        }
         tvCoinMarketCap.text = "$ ${coin.marketCap}"
-        if (!coin.websiteUrl.isNullOrBlank()) {
+        if (coin.websiteUrl.isNotBlank()) {
             layoutGoToWebsite.apply {
                 visibility = View.VISIBLE
                 setOnClickListener {

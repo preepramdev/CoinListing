@@ -1,5 +1,6 @@
 package com.maxnimal.coin.listing.presentation.coin.list.adapter
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -18,11 +19,7 @@ class CoinItemAdapter : RecyclerView.Adapter<CoinItemAdapter.CoinItemViewHolder>
 
     var onCoinItemClick: ((CoinModel) -> Unit)? = null
 
-    fun submitList(coinModelList: List<CoinModel>) {
-        this.coinModelList.addAll(coinModelList)
-        notifyDataSetChanged()
-    }
-
+    @SuppressLint("NotifyDataSetChanged")
     fun updateList(coinModelList: List<CoinModel>) {
         this.coinModelList = coinModelList.toMutableList()
         notifyDataSetChanged()
@@ -48,13 +45,14 @@ class CoinItemAdapter : RecyclerView.Adapter<CoinItemAdapter.CoinItemViewHolder>
         private val binding: ItemCoinBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(coin: CoinModel) = with(binding) {
             root.setOnClickListener {
                 onCoinItemClick?.invoke(coin)
             }
+            ivCoinIcon.loadImageFromUrl(coin.iconUrl)
             tvCoinName.text = coin.name
             tvCoinSymbol.text = coin.symbol
-            ivCoinIcon.loadImageFromUrl(coin.iconUrl)
             tvCoinPrice.apply {
                 val dec = DecimalFormat("#,##0.0000")
                 val price = dec.format(coin.price)
