@@ -1,14 +1,12 @@
 package com.maxnimal.coin.listing.presentation.coin.list.adapter
 
 import android.graphics.Color
-import android.net.Uri
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import coil.ImageLoader
-import coil.decode.SvgDecoder
-import coil.load
-import coil.request.ImageRequest
+import com.maxnimal.coin.listing.R
 import com.maxnimal.coin.listing.databinding.ItemCoinBinding
 import com.maxnimal.coin.listing.domain.model.CoinModel
 import com.maxnimal.coin.listing.presentation.extension.loadImageFromUrl
@@ -60,18 +58,44 @@ class CoinItemAdapter : RecyclerView.Adapter<CoinItemAdapter.CoinItemViewHolder>
             tvCoinPrice.apply {
                 val dec = DecimalFormat("#,##0.0000")
                 val price = dec.format(coin.price)
-                text = "$ $price"
+                text = "$$price"
             }
             tvCoinChange.apply {
                 val dec = DecimalFormat("#,##0.00")
                 val change = dec.format(coin.change)
-                val textColor = if (coin.change > 0.0) {
-                    "#13BC24"
-                } else {
-                    "#F82D2D"
+                val textColor = when {
+                    coin.change > 0.0 -> {
+                        "#13BC24"
+                    }
+                    coin.change < 0.0 -> {
+                        "#F82D2D"
+                    }
+                    else -> null
                 }
-                text = change.replace("-", "")
-                setTextColor(Color.parseColor(textColor))
+                textColor?.let { _textColor ->
+                    this.visibility = View.VISIBLE
+                    text = change.replace("-", "")
+                    setTextColor(Color.parseColor(_textColor))
+                } ?: run {
+                    this.visibility = View.GONE
+                }
+            }
+            ivChangeArrow.apply {
+                val arrowIconResId = when {
+                    coin.change > 0.0 -> {
+                        R.drawable.ic_arrow_up_green
+                    }
+                    coin.change < 0.0 -> {
+                        R.drawable.ic_arrow_down_red
+                    }
+                    else -> null
+                }
+                arrowIconResId?.let { _arrowIconResId ->
+                    this.visibility = View.VISIBLE
+                    setImageDrawable(ContextCompat.getDrawable(this.context, _arrowIconResId))
+                } ?: run {
+                    this.visibility = View.GONE
+                }
             }
         }
     }
