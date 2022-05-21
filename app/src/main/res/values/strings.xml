@@ -6,4 +6,6 @@
     <string name="text_try_again">Try again</string>
     <string name="text_close">Close</string>
     <string name="text_could_not_load_data_for_this_coin">Could not load data for this coin</string>
+    <string name="text_market_cap">MARKET CAP</string>
+    <string name="text_price">PRICE</string>
 </resources>

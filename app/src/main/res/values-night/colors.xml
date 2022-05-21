@@ -11,4 +11,8 @@
     <color name="card_horizontal_price">#FFFFFF</color>
     <color name="card_vertical_header">#FFFFFF</color>
     <color name="card_vertical_sub">#C4C4C4</color>
+    <color name="detail_sub">#FFFFFF</color>
+    <color name="detail_content">#C4C4C4</color>
+    <color name="detail_title">#FFFFFF</color>
+    <color name="detail_price">#FFFFFF</color>
 </resources>
