@@ -14,6 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.maxnimal.coin.listing.R
 import com.maxnimal.coin.listing.databinding.BottomSheetCoinDetailBinding
 import com.maxnimal.coin.listing.domain.model.CoinModel
+import com.maxnimal.coin.listing.presentation.extension.formatCurrency
 import com.maxnimal.coin.listing.presentation.extension.loadImageFromUrl
 import com.maxnimal.coin.listing.presentation.extension.setTextHtml
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -113,11 +114,7 @@ class CoinDetailBottomSheetFragment : BottomSheetDialogFragment() {
         }
         tvCoinSymbol.text = coin.symbol
         tvCoinDetail.setTextHtml(coin.description)
-        tvCoinPrice.apply {
-            val dec = DecimalFormat("#,##0.0000")
-            val price = dec.format(coin.price)
-            text = "$$price"
-        }
+        tvCoinPrice.text = "$${coin.price.formatCurrency("#,##0.0000")}"
         tvCoinMarketCap.text = "$ ${coin.marketCap}"
         if (coin.websiteUrl.isNotBlank()) {
             layoutGoToWebsite.apply {

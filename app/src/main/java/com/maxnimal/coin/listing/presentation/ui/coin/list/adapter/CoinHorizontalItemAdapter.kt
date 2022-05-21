@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maxnimal.coin.listing.R
 import com.maxnimal.coin.listing.databinding.ItemCoinHorizontalBinding
 import com.maxnimal.coin.listing.domain.model.CoinModel
+import com.maxnimal.coin.listing.presentation.extension.formatCurrency
 import com.maxnimal.coin.listing.presentation.ui.coin.list.CoinListViewType
 import com.maxnimal.coin.listing.presentation.extension.loadImageFromUrl
 import java.text.DecimalFormat
@@ -56,14 +57,9 @@ class CoinHorizontalItemAdapter : RecyclerView.Adapter<CoinHorizontalItemAdapter
             ivCoinIcon.loadImageFromUrl(coin.iconUrl)
             tvCoinName.text = coin.name
             tvCoinSymbol.text = coin.symbol
-            tvCoinPrice.apply {
-                val dec = DecimalFormat("#,##0.0000")
-                val price = dec.format(coin.price)
-                text = "$$price"
-            }
+            tvCoinPrice.text = "$${coin.price.formatCurrency("#,##0.0000")}"
             tvCoinChange.apply {
-                val dec = DecimalFormat("#,##0.00")
-                val change = dec.format(coin.change)
+                val change = coin.change.formatCurrency("#,##0.00")
                 val textColor = when {
                     coin.change > 0.0 -> {
                         "#13BC24"
