@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="loading">#38A0FF</color>
     <color name="bg_page">@color/white</color>
+    <color name="change_up">#13BC24</color>
+    <color name="change_down">#F82D2D</color>
 </resources>

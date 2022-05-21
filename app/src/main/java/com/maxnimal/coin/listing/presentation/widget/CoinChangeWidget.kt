@@ -1,7 +1,6 @@
 package com.maxnimal.coin.listing.presentation.widget
 
 import android.content.Context
-import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +15,11 @@ class CoinChangeWidget @JvmOverloads constructor(
     attrs: AttributeSet? = null
 ) : FrameLayout(context, attrs) {
 
+    companion object {
+        private const val FORMAT_CURRENCY = "#,##0.00"
+        private const val ZERO_CHANGE = 0.0
+    }
+
     private val binding = WidgetCoinChangeBinding.inflate(
         LayoutInflater.from(context),
         this,
@@ -24,37 +28,29 @@ class CoinChangeWidget @JvmOverloads constructor(
 
     fun setChange(change: Double) = with(binding) {
         tvCoinChange.apply {
-            val changeText = change.formatCurrency("#,##0.00")
-            val textColor = when {
-                change > 0.0 -> {
-                    "#13BC24"
-                }
-                change < 0.0 -> {
-                    "#F82D2D"
-                }
+            val changeText = change.formatCurrency(FORMAT_CURRENCY)
+            val colorResId = when {
+                (change > ZERO_CHANGE) -> R.color.change_up
+                (change < ZERO_CHANGE) -> R.color.change_down
                 else -> null
             }
-            textColor?.let { _textColor ->
+            colorResId?.let { _colorResId ->
                 this.visibility = View.VISIBLE
                 text = changeText.replace("-", "")
-                setTextColor(Color.parseColor(_textColor))
+                setTextColor(ContextCompat.getColor(context, _colorResId))
             } ?: run {
                 this.visibility = View.GONE
             }
         }
         ivChangeArrow.apply {
             val arrowIconResId = when {
-                change > 0.0 -> {
-                    R.drawable.ic_arrow_up_green
-                }
-                change < 0.0 -> {
-                    R.drawable.ic_arrow_down_red
-                }
+                (change > ZERO_CHANGE) -> R.drawable.ic_arrow_up_green
+                (change < ZERO_CHANGE) -> R.drawable.ic_arrow_down_red
                 else -> null
             }
             arrowIconResId?.let { _arrowIconResId ->
                 this.visibility = View.VISIBLE
-                setImageDrawable(ContextCompat.getDrawable(this.context, _arrowIconResId))
+                setImageDrawable(ContextCompat.getDrawable(context, _arrowIconResId))
             } ?: run {
                 this.visibility = View.GONE
             }
