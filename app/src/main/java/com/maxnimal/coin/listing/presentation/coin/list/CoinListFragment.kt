@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.maxnimal.coin.listing.R
 import com.maxnimal.coin.listing.databinding.FragmentCoinListBinding
+import com.maxnimal.coin.listing.domain.model.CoinModel
 import com.maxnimal.coin.listing.presentation.coin.detail.CoinDetailBottomSheetFragment
 import com.maxnimal.coin.listing.presentation.coin.list.adapter.CoinHorizontalItemAdapter
 import com.maxnimal.coin.listing.presentation.coin.list.adapter.CoinListViewType
@@ -63,20 +64,23 @@ class CoinListFragment : Fragment() {
 
     private fun initView() = with(binding) {
         topRankItemAdapter.onTopTierItemClick = { coinModel ->
-            findNavController().navigate(
-                R.id.action_coinListFragment_to_coinDetailBottomSheetFragment,
-                bundleOf(CoinDetailBottomSheetFragment.KEY_UUID to coinModel.uuid)
-            )
-
+            openCoinDetail(coinModel)
         }
         coinHorizontalItemAdapter.onCoinItemClick = { coinModel ->
-            findNavController().navigate(
-                R.id.action_coinListFragment_to_coinDetailBottomSheetFragment,
-                bundleOf(CoinDetailBottomSheetFragment.KEY_UUID to coinModel.uuid)
-            )
+            openCoinDetail(coinModel)
         }
 
-        swReloadCoins.setOnRefreshListener {
+        rvCoinList.visibility = View.GONE
+        layoutError.visibility = View.GONE
+
+        swReloadCoins.apply {
+            setColorSchemeResources(R.color.loading)
+            setOnRefreshListener {
+                viewModel.reloadCoins()
+            }
+        }
+
+        tvTryAgain.setOnClickListener {
             viewModel.reloadCoins()
         }
 
@@ -87,7 +91,7 @@ class CoinListFragment : Fragment() {
                     override fun getSpanSize(position: Int): Int {
                         return when (coinListConcatAdapter.getItemViewType(position)) {
                             CoinListViewType.TOP_TIER.value -> 3
-                            CoinListViewType.OTHERS.value -> 3
+                            CoinListViewType.OTHERS.value -> resources.getInteger(R.integer.coins_span_size)
                             else -> 0
                         }
                     }
@@ -134,5 +138,12 @@ class CoinListFragment : Fragment() {
         hideLoading.observe(viewLifecycleOwner) {
             binding.swReloadCoins.isRefreshing = false
         }
+    }
+
+    private fun openCoinDetail(coinModel: CoinModel) {
+        findNavController().navigate(
+            R.id.action_coinListFragment_to_coinDetailBottomSheetFragment,
+            bundleOf(CoinDetailBottomSheetFragment.KEY_UUID to coinModel.uuid)
+        )
     }
 }
