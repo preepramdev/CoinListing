@@ -11,6 +11,11 @@ import com.maxnimal.coin.listing.presentation.ui.coin.list.CoinListViewType
 
 class TopRankItemAdapter : RecyclerView.Adapter<TopRankItemAdapter.TopRankItemViewHolder>() {
 
+    companion object {
+        private const val ITEM_COUNT = 1
+        private const val SPAN_SIZE = 3
+    }
+
     private var coinModelList = mutableListOf<CoinModel>()
     private val topRankItemAdapter = CoinVerticalItemAdapter()
 
@@ -35,9 +40,9 @@ class TopRankItemAdapter : RecyclerView.Adapter<TopRankItemAdapter.TopRankItemVi
         holder.bind()
     }
 
-    override fun getItemViewType(position: Int) = CoinListViewType.TOP_TIER.value
+    override fun getItemViewType(position: Int) = CoinListViewType.TOP_RANK.value
 
-    override fun getItemCount(): Int = 1
+    override fun getItemCount(): Int = ITEM_COUNT
 
     inner class TopRankItemViewHolder(
         private val binding: ItemTopRankBinding
@@ -50,7 +55,7 @@ class TopRankItemAdapter : RecyclerView.Adapter<TopRankItemAdapter.TopRankItemVi
             }
             binding.rvTopTier.apply {
                 adapter = topRankItemAdapter
-                layoutManager = GridLayoutManager(binding.root.context, 3)
+                layoutManager = GridLayoutManager(binding.root.context, SPAN_SIZE)
             }
         }
     }

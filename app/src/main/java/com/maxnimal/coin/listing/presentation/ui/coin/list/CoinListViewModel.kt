@@ -18,6 +18,7 @@ class CoinListViewModel(
 
     companion object {
         private const val DEFAULT_LIMIT = 20
+        private const val UPDATE_OFFSET = 0
     }
 
     private var currentCoinList = mutableListOf<CoinModel>()
@@ -65,9 +66,9 @@ class CoinListViewModel(
     }
 
     fun updateCoins() = viewModelScope.launch {
-        val refreshLimit = currentCoinList.size
-        if (refreshLimit > 0) {
-            getCoinsUseCase.execute(refreshLimit, 0)
+        if (currentCoinList.isNotEmpty()) {
+            val refreshLimit = currentCoinList.size
+            getCoinsUseCase.execute(refreshLimit, UPDATE_OFFSET)
                 .catch { exception ->
                     exception.printStackTrace()
                 }.collect { coins ->

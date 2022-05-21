@@ -17,6 +17,10 @@ import java.text.DecimalFormat
 
 class CoinHorizontalItemAdapter : RecyclerView.Adapter<CoinHorizontalItemAdapter.CoinHorizontalItemViewHolder>() {
 
+    companion object {
+        private const val FORMAT_CURRENCY = "#,##0.0000"
+    }
+
     private var coinModelList = mutableListOf<CoinModel>()
 
     var onCoinItemClick: ((CoinModel) -> Unit)? = null
@@ -57,7 +61,7 @@ class CoinHorizontalItemAdapter : RecyclerView.Adapter<CoinHorizontalItemAdapter
             ivCoinIcon.loadImageFromUrl(coin.iconUrl)
             tvCoinName.text = coin.name
             tvCoinSymbol.text = coin.symbol
-            tvCoinPrice.text = "$${coin.price.formatCurrency("#,##0.0000")}"
+            tvCoinPrice.text = "$${coin.price.formatCurrency(FORMAT_CURRENCY)}"
             wgCoinChange.setChange(coin.change)
         }
     }

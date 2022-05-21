@@ -89,7 +89,7 @@ class CoinListFragment : Fragment() {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
                         return when (coinListConcatAdapter.getItemViewType(position)) {
-                            CoinListViewType.TOP_TIER.value -> 3
+                            CoinListViewType.TOP_RANK.value -> 3
                             CoinListViewType.OTHERS.value -> resources.getInteger(R.integer.coins_span_size)
                             else -> 0
                         }
