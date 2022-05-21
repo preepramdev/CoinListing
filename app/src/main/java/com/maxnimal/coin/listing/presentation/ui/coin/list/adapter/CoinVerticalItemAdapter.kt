@@ -53,42 +53,7 @@ class CoinVerticalItemAdapter : RecyclerView.Adapter<CoinVerticalItemAdapter.Coi
             ivCoinIcon.loadImageFromUrl(coin.iconUrl)
             tvCoinName.text = coin.name
             tvCoinSymbol.text = coin.symbol
-            tvCoinChange.apply {
-                val change = coin.change.formatCurrency("#,##0.00")
-                val textColor = when {
-                    coin.change > 0.0 -> {
-                        "#13BC24"
-                    }
-                    coin.change < 0.0 -> {
-                        "#F82D2D"
-                    }
-                    else -> null
-                }
-                textColor?.let { _textColor ->
-                    this.visibility = View.VISIBLE
-                    text = change.replace("-", "")
-                    setTextColor(Color.parseColor(_textColor))
-                } ?: run {
-                    this.visibility = View.GONE
-                }
-            }
-            ivChangeArrow.apply {
-                val arrowIconResId = when {
-                    coin.change > 0.0 -> {
-                        R.drawable.ic_arrow_up_green
-                    }
-                    coin.change < 0.0 -> {
-                        R.drawable.ic_arrow_down_red
-                    }
-                    else -> null
-                }
-                arrowIconResId?.let { _arrowIconResId ->
-                    this.visibility = View.VISIBLE
-                    setImageDrawable(ContextCompat.getDrawable(this.context, _arrowIconResId))
-                } ?: run {
-                    this.visibility = View.GONE
-                }
-            }
+            wgCoinChange.setChange(coin.change)
         }
     }
 }

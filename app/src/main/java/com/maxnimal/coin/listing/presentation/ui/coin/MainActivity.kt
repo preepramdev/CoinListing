@@ -1,4 +1,4 @@
-package com.maxnimal.coin.listing.presentation
+package com.maxnimal.coin.listing.presentation.ui.coin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
