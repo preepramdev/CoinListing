@@ -38,7 +38,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Could not load data "
+                    android:text="@string/text_could_not_load_data"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -47,7 +47,7 @@
                     android:id="@+id/tv_try_again"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Try again"
+                    android:text="@string/text_try_again"
                     android:textColor="#999999"
                     android:textSize="16sp" />
 

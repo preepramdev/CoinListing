@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">CoinListing</string>
     <string name="top_rank_title">Top <font color="#C52322">3</font> rank crypto</string>
+    <string name="text_could_not_load_data">Could not load data</string>
+    <string name="text_try_again">Try again</string>
+    <string name="text_close">Close</string>
+    <string name="text_could_not_load_data_for_this_coin">Could not load data for this coin</string>
 </resources>

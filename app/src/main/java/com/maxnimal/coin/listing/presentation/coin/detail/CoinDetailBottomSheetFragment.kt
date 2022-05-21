@@ -11,6 +11,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.maxnimal.coin.listing.R
 import com.maxnimal.coin.listing.databinding.BottomSheetCoinDetailBinding
@@ -58,17 +59,51 @@ class CoinDetailBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun initView() = with(binding) {
+        pgbLoading.visibility = View.GONE
+        layoutCoinDetail.visibility = View.GONE
+        layoutError.visibility = View.GONE
+        layoutErrorUuid.visibility = View.GONE
 
+        tvTryAgain.setOnClickListener {
+            viewModel.getCoin()
+        }
+
+        tvClose.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun observeViewModel() = with(viewModel) {
         showCoin.observe(viewLifecycleOwner) { coin ->
             showCoinDetail(coin)
         }
+
+        showError.observe(viewLifecycleOwner) {
+            binding.layoutError.visibility = View.VISIBLE
+            binding.layoutErrorUuid.visibility = View.GONE
+            binding.layoutCoinDetail.visibility = View.GONE
+        }
+
+        showErrorUuid.observe(viewLifecycleOwner) {
+            binding.layoutErrorUuid.visibility = View.VISIBLE
+            binding.layoutError.visibility = View.GONE
+            binding.layoutCoinDetail.visibility = View.GONE
+        }
+
+        showLoading.observe(viewLifecycleOwner) {
+            binding.pgbLoading.visibility = View.VISIBLE
+        }
+
+        hideLoading.observe(viewLifecycleOwner) {
+            binding.pgbLoading.visibility = View.GONE
+        }
     }
 
     @SuppressLint("SetTextI18n")
     private fun showCoinDetail(coin: CoinModel) = with(binding) {
+        layoutCoinDetail.visibility = View.VISIBLE
+        layoutError.visibility = View.GONE
+        layoutErrorUuid.visibility = View.GONE
         ivCoinIcon.loadImageFromUrl(coin.iconUrl)
         tvCoinName.apply {
             runCatching {

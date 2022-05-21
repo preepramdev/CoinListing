@@ -5,141 +5,222 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_coin_detail"
-        android:orientation="vertical">
+        android:background="@drawable/bg_coin_detail">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ProgressBar
+            android:id="@+id/pgb_loading"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="36dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/layout_coin_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="32dp">
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toTopOf="@id/tv_coin_detail"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="32dp">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_coin_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toTopOf="@id/tv_coin_detail"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_coin_icon"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_coin_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/iv_coin_icon"
+                        app:layout_constraintTop_toTopOf="@+id/iv_coin_icon"
+                        tools:text="Name"
+                        tools:textColor="#F7931A" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_coin_symbol"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_coin_name"
+                        app:layout_constraintStart_toEndOf="@+id/tv_coin_name"
+                        app:layout_constraintTop_toTopOf="@+id/tv_coin_name"
+                        tools:text="(CNC)" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="PRICE"
+                        android:textColor="#333333"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/tv_coin_name"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_coin_name" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_coin_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textColor="#333333"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_price"
+                        app:layout_constraintStart_toEndOf="@+id/tv_price"
+                        app:layout_constraintTop_toTopOf="@id/tv_price"
+                        tools:text="$$$" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_market_cap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="MARKET CAP"
+                        android:textColor="#333333"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/tv_price"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_price" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_coin_market_cap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textColor="#333333"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_market_cap"
+                        app:layout_constraintStart_toEndOf="@+id/tv_market_cap"
+                        app:layout_constraintTop_toTopOf="@id/tv_market_cap"
+                        tools:text="$$$" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_coin_name"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tv_coin_detail"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/iv_coin_icon"
-                    app:layout_constraintTop_toTopOf="@+id/iv_coin_icon"
-                    tools:text="Name"
-                    tools:textColor="#F7931A" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_coin_symbol"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_coin_name"
-                    app:layout_constraintStart_toEndOf="@+id/tv_coin_name"
-                    app:layout_constraintTop_toTopOf="@+id/tv_coin_name"
-                    tools:text="(CNC)" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="PRICE"
-                    android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/tv_coin_name"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_coin_name" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_coin_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:textColor="#333333"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_price"
-                    app:layout_constraintStart_toEndOf="@+id/tv_price"
-                    app:layout_constraintTop_toTopOf="@id/tv_price"
-                    tools:text="$$$" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_market_cap"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="MARKET CAP"
-                    android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/tv_price"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_price" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_coin_market_cap"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:textColor="#333333"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_market_cap"
-                    app:layout_constraintStart_toEndOf="@+id/tv_market_cap"
-                    app:layout_constraintTop_toTopOf="@id/tv_market_cap"
-                    tools:text="$$$" />
+                    android:textColor="#999999"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_coin_detail"
+            <LinearLayout
+                android:id="@+id/layout_go_to_website"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#999999"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#EEEEEE" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16sp"
+                    android:text="GO TO WEBSITE"
+                    android:textColor="#38A0FF"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/layout_go_to_website"
-            android:layout_width="match_parent"
+            android:id="@+id/layout_error"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#EEEEEE" />
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16sp"
-                android:text="GO TO WEBSITE"
-                android:textColor="#38A0FF"
+                android:text="@string/text_could_not_load_data"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_try_again"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_try_again"
+                android:textColor="#999999"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_error_uuid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_could_not_load_data_for_this_coin"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_close"
+                android:textColor="#999999"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
