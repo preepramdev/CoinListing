@@ -1,4 +1,4 @@
-package com.maxnimal.coin.listing.presentation.coin.list
+package com.maxnimal.coin.listing.presentation.ui.coin.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

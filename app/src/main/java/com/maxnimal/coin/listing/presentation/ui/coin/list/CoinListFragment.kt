@@ -1,4 +1,4 @@
-package com.maxnimal.coin.listing.presentation.coin.list
+package com.maxnimal.coin.listing.presentation.ui.coin.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,10 +15,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maxnimal.coin.listing.R
 import com.maxnimal.coin.listing.databinding.FragmentCoinListBinding
 import com.maxnimal.coin.listing.domain.model.CoinModel
-import com.maxnimal.coin.listing.presentation.coin.detail.CoinDetailBottomSheetFragment
-import com.maxnimal.coin.listing.presentation.coin.list.adapter.CoinHorizontalItemAdapter
-import com.maxnimal.coin.listing.presentation.coin.list.adapter.CoinListViewType
-import com.maxnimal.coin.listing.presentation.coin.list.adapter.TopRankItemAdapter
+import com.maxnimal.coin.listing.presentation.ui.coin.detail.CoinDetailBottomSheetFragment
+import com.maxnimal.coin.listing.presentation.ui.coin.list.adapter.CoinHorizontalItemAdapter
+import com.maxnimal.coin.listing.presentation.ui.coin.list.adapter.TopRankItemAdapter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import org.koin.androidx.viewmodel.ext.android.viewModel

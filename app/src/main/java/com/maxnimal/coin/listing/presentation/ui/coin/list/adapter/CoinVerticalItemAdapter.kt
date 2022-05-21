@@ -1,4 +1,4 @@
-package com.maxnimal.coin.listing.presentation.coin.list.adapter
+package com.maxnimal.coin.listing.presentation.ui.coin.list.adapter
 
 import android.annotation.SuppressLint
 import android.graphics.Color

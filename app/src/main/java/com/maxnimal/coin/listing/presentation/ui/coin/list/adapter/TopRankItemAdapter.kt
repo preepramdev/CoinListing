@@ -1,4 +1,4 @@
-package com.maxnimal.coin.listing.presentation.coin.list.adapter
+package com.maxnimal.coin.listing.presentation.ui.coin.list.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.maxnimal.coin.listing.databinding.ItemTopRankBinding
 import com.maxnimal.coin.listing.domain.model.CoinModel
+import com.maxnimal.coin.listing.presentation.ui.coin.list.CoinListViewType
 
 class TopRankItemAdapter : RecyclerView.Adapter<TopRankItemAdapter.TopRankItemViewHolder>() {
 

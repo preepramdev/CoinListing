@@ -1,4 +1,4 @@
-package com.maxnimal.coin.listing.presentation.coin.list.adapter
+package com.maxnimal.coin.listing.presentation.ui.coin.list.adapter
 
 import android.annotation.SuppressLint
 import android.graphics.Color
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maxnimal.coin.listing.R
 import com.maxnimal.coin.listing.databinding.ItemCoinHorizontalBinding
 import com.maxnimal.coin.listing.domain.model.CoinModel
+import com.maxnimal.coin.listing.presentation.ui.coin.list.CoinListViewType
 import com.maxnimal.coin.listing.presentation.extension.loadImageFromUrl
 import java.text.DecimalFormat
 

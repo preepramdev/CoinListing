@@ -6,8 +6,8 @@ import com.maxnimal.coin.listing.domain.usecase.GetCoinUseCase
 import com.maxnimal.coin.listing.domain.usecase.GetCoinUseCaseImpl
 import com.maxnimal.coin.listing.domain.usecase.GetCoinsUseCase
 import com.maxnimal.coin.listing.domain.usecase.GetCoinsUseCaseImpl
-import com.maxnimal.coin.listing.presentation.coin.detail.CoinDetailViewModel
-import com.maxnimal.coin.listing.presentation.coin.list.CoinListViewModel
+import com.maxnimal.coin.listing.presentation.ui.coin.detail.CoinDetailViewModel
+import com.maxnimal.coin.listing.presentation.ui.coin.list.CoinListViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

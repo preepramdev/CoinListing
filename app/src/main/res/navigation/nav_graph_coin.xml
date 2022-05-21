@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/coinListFragment"
-        android:name="com.maxnimal.coin.listing.presentation.coin.list.CoinListFragment"
+        android:name="com.maxnimal.coin.listing.presentation.ui.coin.list.CoinListFragment"
         tools:layout="@layout/fragment_coin_list">
         <action
             android:id="@+id/action_coinListFragment_to_coinDetailBottomSheetFragment"
@@ -16,6 +16,6 @@
 
     <dialog
         android:id="@+id/coinDetailBottomSheetFragment"
-        android:name="com.maxnimal.coin.listing.presentation.coin.detail.CoinDetailBottomSheetFragment"
+        android:name="com.maxnimal.coin.listing.presentation.ui.coin.detail.CoinDetailBottomSheetFragment"
         tools:layout="@layout/bottom_sheet_coin_detail" />
 </navigation>

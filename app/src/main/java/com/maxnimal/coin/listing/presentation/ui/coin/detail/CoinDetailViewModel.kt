@@ -1,4 +1,4 @@
-package com.maxnimal.coin.listing.presentation.coin.detail
+package com.maxnimal.coin.listing.presentation.ui.coin.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.maxnimal.coin.listing.domain.model.CoinModel
 import com.maxnimal.coin.listing.domain.usecase.GetCoinUseCase
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch

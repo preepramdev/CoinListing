@@ -1,13 +1,11 @@
-package com.maxnimal.coin.listing.presentation.coin.detail
+package com.maxnimal.coin.listing.presentation.ui.coin.detail
 
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
