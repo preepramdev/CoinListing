@@ -1,6 +1,5 @@
 package com.maxnimal.coin.listing.domain.usecase
 
-import android.util.Log
 import com.maxnimal.coin.listing.data.repository.CoinRepository
 import com.maxnimal.coin.listing.data.source.remote.response.GetCoinResponse
 import com.maxnimal.coin.listing.domain.model.CoinModel

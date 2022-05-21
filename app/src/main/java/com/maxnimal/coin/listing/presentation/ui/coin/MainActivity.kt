@@ -1,10 +1,7 @@
 package com.maxnimal.coin.listing.presentation.ui.coin
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.core.content.ContextCompat
-import com.maxnimal.coin.listing.BuildConfig
+import androidx.appcompat.app.AppCompatActivity
 import com.maxnimal.coin.listing.R
 import com.maxnimal.coin.listing.databinding.ActivityMainBinding
 import com.maxnimal.coin.listing.presentation.extension.setStatusBar
