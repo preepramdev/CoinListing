@@ -14,6 +14,9 @@ class CoinDetailViewModel(
     private val getCoinUseCase: GetCoinUseCase
 ) : ViewModel() {
 
+    // todo loading
+    // todo error
+
     private val _showCoin = MutableLiveData<CoinModel>()
     val showCoin: LiveData<CoinModel> = _showCoin
 

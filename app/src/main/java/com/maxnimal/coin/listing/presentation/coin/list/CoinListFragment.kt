@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -31,7 +32,8 @@ class CoinListFragment : Fragment() {
     }.build()
     private val topRankItemAdapter = TopRankItemAdapter()
     private val coinHorizontalItemAdapter = CoinHorizontalItemAdapter()
-    private val coinListConcatAdapter = ConcatAdapter(config, topRankItemAdapter, coinHorizontalItemAdapter)
+    private val coinListConcatAdapter =
+        ConcatAdapter(config, topRankItemAdapter, coinHorizontalItemAdapter)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,7 +56,7 @@ class CoinListFragment : Fragment() {
         lifecycleScope.launchWhenResumed {
             while (isActive) {
                 delay(10000L)
-                viewModel.refreshCoins()
+                viewModel.updateCoins()
             }
         }
     }
@@ -72,6 +74,10 @@ class CoinListFragment : Fragment() {
                 R.id.action_coinListFragment_to_coinDetailBottomSheetFragment,
                 bundleOf(CoinDetailBottomSheetFragment.KEY_UUID to coinModel.uuid)
             )
+        }
+
+        swReloadCoins.setOnRefreshListener {
+            viewModel.reloadCoins()
         }
 
         rvCoinList.apply {
@@ -104,8 +110,29 @@ class CoinListFragment : Fragment() {
 
     private fun observeViewModel() = with(viewModel) {
         showCoinList.observe(viewLifecycleOwner) { coinModelList ->
+            binding.rvCoinList.visibility = View.VISIBLE
+            binding.layoutError.visibility = View.GONE
             topRankItemAdapter.submitList(coinModelList.take(3))
             coinHorizontalItemAdapter.updateList(coinModelList.drop(3))
+        }
+
+        showError.observe(viewLifecycleOwner) {
+            binding.layoutError.visibility = View.VISIBLE
+            binding.rvCoinList.visibility = View.GONE
+            topRankItemAdapter.submitList(emptyList())
+            coinHorizontalItemAdapter.updateList(emptyList())
+        }
+
+        showErrorLoadMore.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), "Sorry, Something wrong", Toast.LENGTH_SHORT).show()
+        }
+
+        showLoading.observe(viewLifecycleOwner) {
+            binding.swReloadCoins.isRefreshing = true
+        }
+
+        hideLoading.observe(viewLifecycleOwner) {
+            binding.swReloadCoins.isRefreshing = false
         }
     }
 }

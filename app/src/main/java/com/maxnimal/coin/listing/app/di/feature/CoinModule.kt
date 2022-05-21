@@ -8,7 +8,6 @@ import com.maxnimal.coin.listing.domain.usecase.GetCoinsUseCase
 import com.maxnimal.coin.listing.domain.usecase.GetCoinsUseCaseImpl
 import com.maxnimal.coin.listing.presentation.coin.detail.CoinDetailViewModel
 import com.maxnimal.coin.listing.presentation.coin.list.CoinListViewModel
-import com.maxnimal.coin.listing.presentation.coin.toprank.TopRankCoinsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -42,9 +41,5 @@ val coinModule = module {
         CoinListViewModel(
             getCoinsUseCase = get()
         )
-    }
-
-    viewModel {
-        TopRankCoinsViewModel()
     }
 }
