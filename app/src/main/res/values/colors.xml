@@ -2,8 +2,16 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="page_bg">#FFFFFFFF</color>
+    <color name="status_bar">@color/white</color>
+    <color name="header">@color/black</color>
+    <color name="card">#F9F9F9</color>
+    <color name="card_horizontal_header">#333333</color>
+    <color name="card_horizontal_sub">#999999</color>
+    <color name="card_horizontal_price">#333333</color>
+    <color name="card_vertical_header">#3C3C3C</color>
+    <color name="card_vertical_sub">#999999</color>
     <color name="loading">#38A0FF</color>
-    <color name="bg_page">@color/white</color>
     <color name="change_up">#13BC24</color>
     <color name="change_down">#F82D2D</color>
 </resources>

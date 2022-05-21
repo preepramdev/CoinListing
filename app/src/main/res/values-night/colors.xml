@@ -2,5 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="bg_page">@color/white</color>
+    <color name="page_bg">#333333</color>
+    <color name="status_bar">#333333</color>
+    <color name="header">@color/white</color>
+    <color name="card">#3C3C3C</color>
+    <color name="card_horizontal_header">#FFFFFF</color>
+    <color name="card_horizontal_sub">#C4C4C4</color>
+    <color name="card_horizontal_price">#FFFFFF</color>
+    <color name="card_vertical_header">#FFFFFF</color>
+    <color name="card_vertical_sub">#C4C4C4</color>
 </resources>

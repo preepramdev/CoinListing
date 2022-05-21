@@ -17,4 +17,9 @@
     <style name="BottomSheetModal" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
     </style>
+
+    <style name="HeaderText">
+        <item name="android:textColor">@color/header</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

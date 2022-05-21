@@ -174,12 +174,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
+                style="@style/HeaderText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_could_not_load_data"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_try_again"
@@ -204,12 +203,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
+                style="@style/HeaderText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_could_not_load_data_for_this_coin"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_close"

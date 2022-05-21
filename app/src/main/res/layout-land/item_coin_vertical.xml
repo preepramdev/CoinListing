@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="4dp"
     android:layout_marginVertical="1dp"
-    app:cardBackgroundColor="#F9F9F9"
+    app:cardBackgroundColor="@color/card"
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp">
 
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textColor="#3C3C3C"
+            android:textColor="@color/card_vertical_header"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/iv_coin_icon"
@@ -45,7 +45,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textAlignment="center"
-            android:textColor="#999999"
+            android:textColor="@color/card_vertical_sub"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
