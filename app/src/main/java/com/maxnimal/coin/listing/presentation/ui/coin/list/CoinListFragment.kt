@@ -17,6 +17,8 @@ import com.maxnimal.coin.listing.databinding.FragmentCoinListBinding
 import com.maxnimal.coin.listing.domain.model.CoinModel
 import com.maxnimal.coin.listing.presentation.ui.coin.detail.CoinDetailBottomSheetFragment
 import com.maxnimal.coin.listing.presentation.ui.coin.list.adapter.CoinHorizontalItemAdapter
+import com.maxnimal.coin.listing.presentation.ui.coin.list.adapter.HeaderBuySellHoldItemAdapter
+import com.maxnimal.coin.listing.presentation.ui.coin.list.adapter.HeaderTopRankItemAdapter
 import com.maxnimal.coin.listing.presentation.ui.coin.list.adapter.TopRankItemAdapter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -27,13 +29,20 @@ class CoinListFragment : Fragment() {
     private val binding by lazy { FragmentCoinListBinding.inflate(layoutInflater) }
     private val viewModel: CoinListViewModel by viewModel()
 
-    private val config = ConcatAdapter.Config.Builder().apply {
+    private val configConcatAdapter = ConcatAdapter.Config.Builder().apply {
         setIsolateViewTypes(false)
     }.build()
-    private val topRankItemAdapter = TopRankItemAdapter()
-    private val coinHorizontalItemAdapter = CoinHorizontalItemAdapter()
-    private val coinListConcatAdapter =
-        ConcatAdapter(config, topRankItemAdapter, coinHorizontalItemAdapter)
+    private val headerTopRankAdapter = HeaderTopRankItemAdapter()
+    private val topRankAdapter = TopRankItemAdapter()
+    private val headerBuySellHoldItemAdapter = HeaderBuySellHoldItemAdapter()
+    private val coinHorizontalAdapter = CoinHorizontalItemAdapter()
+    private val coinListConcatAdapter = ConcatAdapter(
+        configConcatAdapter,
+        headerTopRankAdapter,
+        topRankAdapter,
+        headerBuySellHoldItemAdapter,
+        coinHorizontalAdapter
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,10 +71,10 @@ class CoinListFragment : Fragment() {
     }
 
     private fun initView() = with(binding) {
-        topRankItemAdapter.onTopTierItemClick = { coinModel ->
+        topRankAdapter.onTopTierItemClick = { coinModel ->
             openCoinDetail(coinModel)
         }
-        coinHorizontalItemAdapter.onCoinItemClick = { coinModel ->
+        coinHorizontalAdapter.onCoinItemClick = { coinModel ->
             openCoinDetail(coinModel)
         }
 
@@ -91,6 +100,8 @@ class CoinListFragment : Fragment() {
                         return when (coinListConcatAdapter.getItemViewType(position)) {
                             CoinListViewType.TOP_RANK.value -> 3
                             CoinListViewType.OTHERS.value -> resources.getInteger(R.integer.coins_span_size)
+                            CoinListViewType.HEADER_TOP_RANK.value -> 3
+                            CoinListViewType.HEADER_BUY_SELL_HOLD.value -> 3
                             else -> 0
                         }
                     }
@@ -99,7 +110,7 @@ class CoinListFragment : Fragment() {
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     if (dy > 0) {
-                        val childCount = coinHorizontalItemAdapter.itemCount
+                        val childCount = coinHorizontalAdapter.itemCount
                         val lastPosition =
                             (layoutManager as GridLayoutManager).findLastCompletelyVisibleItemPosition()
                         if (childCount - 1 == lastPosition) {
@@ -115,15 +126,15 @@ class CoinListFragment : Fragment() {
         showCoinList.observe(viewLifecycleOwner) { coinModelList ->
             binding.rvCoinList.visibility = View.VISIBLE
             binding.layoutError.visibility = View.GONE
-            topRankItemAdapter.submitList(coinModelList.take(3))
-            coinHorizontalItemAdapter.updateList(coinModelList.drop(3))
+            topRankAdapter.submitList(coinModelList.take(3))
+            coinHorizontalAdapter.updateList(coinModelList.drop(3))
         }
 
         showError.observe(viewLifecycleOwner) {
             binding.layoutError.visibility = View.VISIBLE
             binding.rvCoinList.visibility = View.GONE
-            topRankItemAdapter.submitList(emptyList())
-            coinHorizontalItemAdapter.updateList(emptyList())
+            topRankAdapter.submitList(emptyList())
+            coinHorizontalAdapter.updateList(emptyList())
         }
 
         showErrorLoadMore.observe(viewLifecycleOwner) {

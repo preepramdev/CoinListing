@@ -6,10 +6,10 @@
     android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tv_top_rank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="@string/top_rank_title"
+        android:text="@string/text_top_rank_title"
         android:textColor="#333333"
         android:textStyle="bold" />
 
