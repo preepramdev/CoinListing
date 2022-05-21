@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.maxnimal.coin.listing.databinding.ItemTopTierBinding
+import com.maxnimal.coin.listing.databinding.ItemTopRankBinding
 import com.maxnimal.coin.listing.domain.model.CoinModel
 
-class TopTierAdapter : RecyclerView.Adapter<TopTierAdapter.TopTierViewHolder>() {
+class TopRankItemAdapter : RecyclerView.Adapter<TopRankItemAdapter.TopRankItemViewHolder>() {
 
     private var coinModelList = mutableListOf<CoinModel>()
     private val topRankItemAdapter = CoinVerticalItemAdapter()
@@ -21,16 +21,16 @@ class TopTierAdapter : RecyclerView.Adapter<TopTierAdapter.TopTierViewHolder>() 
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopTierViewHolder {
-        val binding = ItemTopTierBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopRankItemViewHolder {
+        val binding = ItemTopRankBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return TopTierViewHolder(binding)
+        return TopRankItemViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: TopTierViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TopRankItemViewHolder, position: Int) {
         holder.bind()
     }
 
@@ -38,8 +38,8 @@ class TopTierAdapter : RecyclerView.Adapter<TopTierAdapter.TopTierViewHolder>() 
 
     override fun getItemCount(): Int = 1
 
-    inner class TopTierViewHolder(
-        private val binding: ItemTopTierBinding
+    inner class TopRankItemViewHolder(
+        private val binding: ItemTopRankBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind() {

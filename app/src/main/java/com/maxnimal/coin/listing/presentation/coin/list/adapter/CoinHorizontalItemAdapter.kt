@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.maxnimal.coin.listing.R
-import com.maxnimal.coin.listing.databinding.ItemCoinBinding
+import com.maxnimal.coin.listing.databinding.ItemCoinHorizontalBinding
 import com.maxnimal.coin.listing.domain.model.CoinModel
 import com.maxnimal.coin.listing.presentation.extension.loadImageFromUrl
 import java.text.DecimalFormat
 
-class CoinItemAdapter : RecyclerView.Adapter<CoinItemAdapter.CoinItemViewHolder>() {
+class CoinHorizontalItemAdapter : RecyclerView.Adapter<CoinHorizontalItemAdapter.CoinHorizontalItemViewHolder>() {
 
     private var coinModelList = mutableListOf<CoinModel>()
 
@@ -25,16 +25,16 @@ class CoinItemAdapter : RecyclerView.Adapter<CoinItemAdapter.CoinItemViewHolder>
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinItemViewHolder {
-        val binding = ItemCoinBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinHorizontalItemViewHolder {
+        val binding = ItemCoinHorizontalBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return CoinItemViewHolder(binding)
+        return CoinHorizontalItemViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CoinItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CoinHorizontalItemViewHolder, position: Int) {
         val coinModel = coinModelList[position]
         holder.bind(coinModel)
     }
@@ -43,8 +43,8 @@ class CoinItemAdapter : RecyclerView.Adapter<CoinItemAdapter.CoinItemViewHolder>
 
     override fun getItemCount(): Int = coinModelList.size
 
-    inner class CoinItemViewHolder(
-        private val binding: ItemCoinBinding
+    inner class CoinHorizontalItemViewHolder(
+        private val binding: ItemCoinHorizontalBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
