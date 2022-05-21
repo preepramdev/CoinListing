@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.maxnimal.coin.listing.R
-import com.maxnimal.coin.listing.databinding.ItemTopRankBinding
+import com.maxnimal.coin.listing.databinding.ItemCoinVerticalBinding
 import com.maxnimal.coin.listing.domain.model.CoinModel
 import com.maxnimal.coin.listing.presentation.extension.loadImageFromUrl
 import java.text.DecimalFormat
 
-class TopRankItemAdapter : RecyclerView.Adapter<TopRankItemAdapter.TopRankItemVieHolder>() {
+class CoinVerticalItemAdapter : RecyclerView.Adapter<CoinVerticalItemAdapter.CoinVerticalItemVieHolder>() {
 
     private var coinModelList = mutableListOf<CoinModel>()
 
@@ -25,24 +25,24 @@ class TopRankItemAdapter : RecyclerView.Adapter<TopRankItemAdapter.TopRankItemVi
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopRankItemVieHolder {
-        val binding = ItemTopRankBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinVerticalItemVieHolder {
+        val binding = ItemCoinVerticalBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return TopRankItemVieHolder(binding)
+        return CoinVerticalItemVieHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: TopRankItemVieHolder, position: Int) {
+    override fun onBindViewHolder(holder: CoinVerticalItemVieHolder, position: Int) {
         val coinModel = coinModelList[position]
         holder.bind(coinModel)
     }
 
     override fun getItemCount(): Int = coinModelList.size
 
-    inner class TopRankItemVieHolder(
-        private val binding: ItemTopRankBinding
+    inner class CoinVerticalItemVieHolder(
+        private val binding: ItemCoinVerticalBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(coin: CoinModel) = with(binding) {

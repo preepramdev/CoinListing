@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CoinListing</string>
+    <string name="top_rank_title">Top <font color="#C52322">3</font> rank crypto</string>
 </resources>

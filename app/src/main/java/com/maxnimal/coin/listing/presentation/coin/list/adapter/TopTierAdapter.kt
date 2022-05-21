@@ -11,7 +11,7 @@ import com.maxnimal.coin.listing.domain.model.CoinModel
 class TopTierAdapter : RecyclerView.Adapter<TopTierAdapter.TopTierViewHolder>() {
 
     private var coinModelList = mutableListOf<CoinModel>()
-    private val topRankItemAdapter = TopRankItemAdapter()
+    private val topRankItemAdapter = CoinVerticalItemAdapter()
 
     var onTopTierItemClick: ((CoinModel) -> Unit)? = null
 
