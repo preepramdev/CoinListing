@@ -78,15 +78,19 @@ class CoinDetailBottomSheetFragment : BottomSheetDialogFragment() {
         }
 
         showError.observe(viewLifecycleOwner) {
-            binding.layoutError.visibility = View.VISIBLE
-            binding.layoutErrorUuid.visibility = View.GONE
-            binding.layoutCoinDetail.visibility = View.GONE
+            binding.apply {
+                layoutError.visibility = View.VISIBLE
+                layoutErrorUuid.visibility = View.GONE
+                layoutCoinDetail.visibility = View.GONE
+            }
         }
 
         showErrorUuid.observe(viewLifecycleOwner) {
-            binding.layoutErrorUuid.visibility = View.VISIBLE
-            binding.layoutError.visibility = View.GONE
-            binding.layoutCoinDetail.visibility = View.GONE
+            binding.apply {
+                layoutErrorUuid.visibility = View.VISIBLE
+                layoutError.visibility = View.GONE
+                layoutCoinDetail.visibility = View.GONE
+            }
         }
 
         showLoading.observe(viewLifecycleOwner) {

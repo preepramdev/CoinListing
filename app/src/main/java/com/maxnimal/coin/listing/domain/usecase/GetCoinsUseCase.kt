@@ -20,6 +20,9 @@ class GetCoinsUseCaseImpl(
 ) : GetCoinsUseCase {
 
     companion object {
+        private const val DEFAULT_PRICE = 0.0
+        private const val DEFAULT_CHANGE = 0.0
+        private const val EMPTY_STRING = ""
         private const val STATUS_SUCCESS = "success"
     }
 
@@ -30,7 +33,6 @@ class GetCoinsUseCaseImpl(
             } else {
                 error("getCoinsResponse fail")
             }
-
         }
     }
 
@@ -43,10 +45,10 @@ class GetCoinsUseCaseImpl(
                     name = coin.name.orEmpty(),
                     iconUrl = coin.iconUrl.orEmpty(),
                     color = coin.color.orEmpty(),
-                    description = "",
-                    websiteUrl = "",
-                    price = coin.price?.toDouble() ?: 0.0,
-                    change = coin.change?.toDouble() ?: 0.0,
+                    description = EMPTY_STRING,
+                    websiteUrl = EMPTY_STRING,
+                    price = coin.price?.toDouble() ?: DEFAULT_PRICE,
+                    change = coin.change?.toDouble() ?: DEFAULT_CHANGE,
                     marketCap = coin.marketCap.orEmpty()
                 )
             }

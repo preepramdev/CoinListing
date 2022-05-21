@@ -18,6 +18,8 @@ class GetCoinUseCaseImpl(
 ) : GetCoinUseCase {
 
     companion object {
+        private const val DEFAULT_PRICE = 0.0
+        private const val DEFAULT_CHANGE = 0.0
         private const val STATUS_SUCCESS = "success"
     }
 
@@ -41,8 +43,8 @@ class GetCoinUseCaseImpl(
                 iconUrl = _coin.iconUrl.orEmpty(),
                 color = _coin.color.orEmpty(),
                 description = _coin.description.orEmpty(),
-                price = coin.price?.toDouble() ?: 0.0,
-                change = coin.change?.toDouble() ?: 0.0,
+                price = coin.price?.toDouble() ?: DEFAULT_PRICE,
+                change = coin.change?.toDouble() ?: DEFAULT_CHANGE,
                 marketCap = _coin.marketCap.orEmpty(),
                 websiteUrl = _coin.websiteUrl.orEmpty()
             )
