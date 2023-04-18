@@ -54,6 +54,7 @@ class CoinListViewModel(
                     _showErrorLoadMore.value = Unit
                 }
             }.collect { coins ->
+                // todo refactor better caching strategies
                 currentCoinList.addAll(coins)
                 _showCoinList.value = currentCoinList
             }
