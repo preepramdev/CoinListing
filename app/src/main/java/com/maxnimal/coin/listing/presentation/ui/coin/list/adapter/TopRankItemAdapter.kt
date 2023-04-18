@@ -17,7 +17,7 @@ class TopRankItemAdapter : RecyclerView.Adapter<TopRankItemAdapter.TopRankItemVi
     }
 
     private var coinModelList = mutableListOf<CoinModel>()
-    private val topRankItemAdapter = CoinVerticalItemAdapter()
+    private val coinVerticalItemAdapter = CoinVerticalItemAdapter()
 
     var onTopTierItemClick: ((CoinModel) -> Unit)? = null
 
@@ -49,12 +49,12 @@ class TopRankItemAdapter : RecyclerView.Adapter<TopRankItemAdapter.TopRankItemVi
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind() {
-            topRankItemAdapter.apply {
+            coinVerticalItemAdapter.apply {
                 submitList(coinModelList)
                 this.onTopRankItemClick = onTopTierItemClick
             }
             binding.rvTopTier.apply {
-                adapter = topRankItemAdapter
+                adapter = coinVerticalItemAdapter
                 layoutManager = GridLayoutManager(binding.root.context, SPAN_SIZE)
             }
         }

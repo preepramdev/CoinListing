@@ -17,8 +17,8 @@ import com.maxnimal.coin.listing.databinding.FragmentCoinListBinding
 import com.maxnimal.coin.listing.domain.model.CoinModel
 import com.maxnimal.coin.listing.presentation.ui.coin.detail.CoinDetailBottomSheetFragment
 import com.maxnimal.coin.listing.presentation.ui.coin.list.adapter.CoinHorizontalItemAdapter
-import com.maxnimal.coin.listing.presentation.ui.coin.list.adapter.HeaderBuySellHoldItemAdapter
-import com.maxnimal.coin.listing.presentation.ui.coin.list.adapter.HeaderTopRankItemAdapter
+import com.maxnimal.coin.listing.presentation.ui.coin.list.adapter.header.HeaderBuySellHoldItemAdapter
+import com.maxnimal.coin.listing.presentation.ui.coin.list.adapter.header.HeaderTopRankItemAdapter
 import com.maxnimal.coin.listing.presentation.ui.coin.list.adapter.TopRankItemAdapter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -32,6 +32,7 @@ class CoinListFragment : Fragment() {
     private val configConcatAdapter = ConcatAdapter.Config.Builder().apply {
         setIsolateViewTypes(false)
     }.build()
+
     private val headerTopRankAdapter = HeaderTopRankItemAdapter()
     private val topRankAdapter = TopRankItemAdapter()
     private val headerBuySellHoldItemAdapter = HeaderBuySellHoldItemAdapter()

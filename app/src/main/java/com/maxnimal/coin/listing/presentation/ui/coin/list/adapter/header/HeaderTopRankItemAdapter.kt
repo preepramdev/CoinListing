@@ -1,4 +1,4 @@
-package com.maxnimal.coin.listing.presentation.ui.coin.list.adapter
+package com.maxnimal.coin.listing.presentation.ui.coin.list.adapter.header
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
