@@ -2,6 +2,7 @@ package com.maxnimal.coin.listing.app.di.shared
 
 import com.google.gson.Gson
 import com.maxnimal.coin.listing.BuildConfig
+import com.maxnimal.coin.listing.app.network.AuthenticatorInterceptor
 import com.maxnimal.coin.listing.data.source.remote.CoinRankingApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,7 +23,12 @@ val networkModule = module {
     }
 
     single {
+        AuthenticatorInterceptor()
+    }
+
+    single {
         provideOkHttpClient(
+            authenticatorInterceptor = get(),
             httpLoggingInterceptor = get()
         )
     }
@@ -40,8 +46,12 @@ val networkModule = module {
     }
 }
 
-fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
+fun provideOkHttpClient(
+    authenticatorInterceptor: AuthenticatorInterceptor,
+    httpLoggingInterceptor: HttpLoggingInterceptor
+): OkHttpClient =
     OkHttpClient.Builder()
+        .addInterceptor(authenticatorInterceptor)
         .addInterceptor(httpLoggingInterceptor)
         .build()
 
