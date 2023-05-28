@@ -141,6 +141,7 @@ class CoinListFragment : Fragment() {
             binding.rvCoinList.visibility = View.GONE
             topRankAdapter.submitList(emptyList())
             coinHorizontalAdapter.updateList(emptyList())
+            // todo using paging library
         }
 
         showErrorLoadMore.observe(viewLifecycleOwner) {
