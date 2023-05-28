@@ -37,6 +37,8 @@ class CoinListFragment : Fragment() {
     private val topRankAdapter = TopRankItemAdapter()
     private val headerBuySellHoldItemAdapter = HeaderBuySellHoldItemAdapter()
     private val coinHorizontalAdapter = CoinHorizontalItemAdapter()
+
+    // todo note to prevent blink effect avoid using notify notifyDataSetChange
     private val coinListConcatAdapter = ConcatAdapter(
         configConcatAdapter,
         headerTopRankAdapter,
@@ -68,9 +70,9 @@ class CoinListFragment : Fragment() {
                 delay(10000L)
                 binding.apply {
                     // todo should remove?
-                    if (rvCoinList.scrollState != RecyclerView.SCROLL_STATE_DRAGGING) {
+//                    if (rvCoinList.scrollState != RecyclerView.SCROLL_STATE_DRAGGING) {
                         viewModel.updateCoins()
-                    }
+//                    }
                 }
             }
         }
@@ -133,14 +135,14 @@ class CoinListFragment : Fragment() {
             binding.rvCoinList.visibility = View.VISIBLE
             binding.layoutError.visibility = View.GONE
             topRankAdapter.submitList(coinModelList.take(3))
-            coinHorizontalAdapter.updateList(coinModelList.drop(3))
+            coinHorizontalAdapter.submitList(coinModelList.drop(3))
         }
 
         showError.observe(viewLifecycleOwner) {
             binding.layoutError.visibility = View.VISIBLE
             binding.rvCoinList.visibility = View.GONE
             topRankAdapter.submitList(emptyList())
-            coinHorizontalAdapter.updateList(emptyList())
+            coinHorizontalAdapter.submitList(emptyList())
             // todo using paging library
         }
 
