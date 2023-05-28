@@ -1,30 +1,17 @@
 package com.maxnimal.coin.listing.presentation.ui.coin.list.adapter
 
-import android.annotation.SuppressLint
-import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.maxnimal.coin.listing.R
 import com.maxnimal.coin.listing.databinding.ItemCoinVerticalBinding
 import com.maxnimal.coin.listing.domain.model.CoinModel
-import com.maxnimal.coin.listing.presentation.extension.formatCurrency
 import com.maxnimal.coin.listing.presentation.extension.loadImageFromUrl
-import java.text.DecimalFormat
 
-class CoinVerticalItemAdapter : RecyclerView.Adapter<CoinVerticalItemAdapter.CoinVerticalItemVieHolder>() {
-
-    private var coinModelList = mutableListOf<CoinModel>()
+class CoinVerticalItemAdapter : ListAdapter<CoinModel, CoinVerticalItemAdapter.CoinVerticalItemVieHolder>(CoinVerticalItemDiffCallBack()) {
 
     var onTopRankItemClick: ((CoinModel) -> Unit)? = null
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun submitList(coinModelList: List<CoinModel>) {
-        this.coinModelList = coinModelList.toMutableList()
-        notifyDataSetChanged()
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinVerticalItemVieHolder {
         val binding = ItemCoinVerticalBinding.inflate(
@@ -36,11 +23,9 @@ class CoinVerticalItemAdapter : RecyclerView.Adapter<CoinVerticalItemAdapter.Coi
     }
 
     override fun onBindViewHolder(holder: CoinVerticalItemVieHolder, position: Int) {
-        val coinModel = coinModelList[position]
+        val coinModel = getItem(position)
         holder.bind(coinModel)
     }
-
-    override fun getItemCount(): Int = coinModelList.size
 
     inner class CoinVerticalItemVieHolder(
         private val binding: ItemCoinVerticalBinding
@@ -55,5 +40,17 @@ class CoinVerticalItemAdapter : RecyclerView.Adapter<CoinVerticalItemAdapter.Coi
             tvCoinSymbol.text = coin.symbol
             wgCoinChange.setChange(coin.change)
         }
+    }
+
+    class CoinVerticalItemDiffCallBack : DiffUtil.ItemCallback<CoinModel>() {
+
+        override fun areItemsTheSame(oldItem: CoinModel, newItem: CoinModel): Boolean {
+            return newItem.uuid == oldItem.uuid
+        }
+
+        override fun areContentsTheSame(oldItem: CoinModel, newItem: CoinModel): Boolean {
+            return newItem == oldItem
+        }
+
     }
 }

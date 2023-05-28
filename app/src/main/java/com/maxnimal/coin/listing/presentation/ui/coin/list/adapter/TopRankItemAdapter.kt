@@ -16,15 +16,13 @@ class TopRankItemAdapter : RecyclerView.Adapter<TopRankItemAdapter.TopRankItemVi
         private const val SPAN_SIZE = 3
     }
 
-    private var coinModelList = mutableListOf<CoinModel>()
     private val coinVerticalItemAdapter = CoinVerticalItemAdapter()
 
     var onTopTierItemClick: ((CoinModel) -> Unit)? = null
 
     @SuppressLint("NotifyDataSetChanged")
     fun submitList(coinModelList: List<CoinModel>) {
-        this.coinModelList = coinModelList.toMutableList()
-        notifyDataSetChanged()
+        coinVerticalItemAdapter.submitList(coinModelList)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopRankItemViewHolder {
@@ -50,7 +48,6 @@ class TopRankItemAdapter : RecyclerView.Adapter<TopRankItemAdapter.TopRankItemVi
 
         fun bind() {
             coinVerticalItemAdapter.apply {
-                submitList(coinModelList)
                 this.onTopRankItemClick = onTopTierItemClick
             }
             binding.rvTopTier.apply {
