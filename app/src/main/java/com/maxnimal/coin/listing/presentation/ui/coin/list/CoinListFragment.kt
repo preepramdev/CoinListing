@@ -17,14 +17,20 @@ import com.maxnimal.coin.listing.databinding.FragmentCoinListBinding
 import com.maxnimal.coin.listing.domain.model.CoinModel
 import com.maxnimal.coin.listing.presentation.ui.coin.detail.CoinDetailBottomSheetFragment
 import com.maxnimal.coin.listing.presentation.ui.coin.list.adapter.CoinHorizontalItemAdapter
-import com.maxnimal.coin.listing.presentation.ui.coin.list.adapter.header.HeaderBuySellHoldItemAdapter
-import com.maxnimal.coin.listing.presentation.ui.coin.list.adapter.header.HeaderTopRankItemAdapter
+import com.maxnimal.coin.listing.presentation.ui.coin.list.adapter.HeaderStringResItemAdapter
 import com.maxnimal.coin.listing.presentation.ui.coin.list.adapter.TopRankItemAdapter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CoinListFragment : Fragment() {
+
+    companion object {
+        private const val INTERVAL_REFRESH_TIME = 10000L
+        private const val LIST_SPAN_SIZE_FULL = 3
+        private const val LIST_SPAN_SIZE_HIDE = 0
+        private const val SIZE_OF_TOP_RANK = 3
+    }
 
     private val binding by lazy { FragmentCoinListBinding.inflate(layoutInflater) }
     private val viewModel: CoinListViewModel by viewModel()
@@ -33,9 +39,9 @@ class CoinListFragment : Fragment() {
         setIsolateViewTypes(false)
     }.build()
 
-    private val headerTopRankAdapter = HeaderTopRankItemAdapter()
+    private val headerTopRankAdapter = HeaderStringResItemAdapter(isVisible = false)
     private val topRankAdapter = TopRankItemAdapter()
-    private val headerBuySellHoldItemAdapter = HeaderBuySellHoldItemAdapter()
+    private val headerBuySellHoldItemAdapter = HeaderStringResItemAdapter(isVisible = false)
     private val coinHorizontalAdapter = CoinHorizontalItemAdapter()
 
     // todo note to prevent blink effect avoid using notify notifyDataSetChange
@@ -67,7 +73,7 @@ class CoinListFragment : Fragment() {
         super.onResume()
         lifecycleScope.launchWhenResumed {
             while (isActive) {
-                delay(10000L)
+                delay(INTERVAL_REFRESH_TIME)
                 binding.apply {
                     // todo should remove?
 //                    if (rvCoinList.scrollState != RecyclerView.SCROLL_STATE_DRAGGING) {
@@ -79,6 +85,8 @@ class CoinListFragment : Fragment() {
     }
 
     private fun initView() = with(binding) {
+        headerTopRankAdapter.updateTextHeader(R.string.text_top_rank_title)
+        headerBuySellHoldItemAdapter.updateTextHeader(R.string.text_buy_sell_and_hold)
         topRankAdapter.onTopTierItemClick = { coinModel ->
             openCoinDetail(coinModel)
         }
@@ -106,11 +114,10 @@ class CoinListFragment : Fragment() {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
                         return when (coinListConcatAdapter.getItemViewType(position)) {
-                            CoinListViewType.TOP_RANK.value -> 3
+                            CoinListViewType.TOP_RANK.value -> LIST_SPAN_SIZE_FULL
                             CoinListViewType.OTHERS.value -> resources.getInteger(R.integer.coins_span_size)
-                            CoinListViewType.HEADER_TOP_RANK.value -> 3
-                            CoinListViewType.HEADER_BUY_SELL_HOLD.value -> 3
-                            else -> 0
+                            CoinListViewType.TEXT_HEADER.value -> LIST_SPAN_SIZE_FULL
+                            else -> LIST_SPAN_SIZE_HIDE
                         }
                     }
                 }
@@ -134,8 +141,10 @@ class CoinListFragment : Fragment() {
         showCoinList.observe(viewLifecycleOwner) { coinModelList ->
             binding.rvCoinList.visibility = View.VISIBLE
             binding.layoutError.visibility = View.GONE
-            topRankAdapter.submitList(coinModelList.take(3))
-            coinHorizontalAdapter.submitList(coinModelList.drop(3))
+            val topThreeCoinList = coinModelList.take(SIZE_OF_TOP_RANK)
+            val restOfCoinList = coinModelList.drop(SIZE_OF_TOP_RANK)
+            topRankAdapter.submitList(topThreeCoinList)
+            coinHorizontalAdapter.submitList(restOfCoinList)
         }
 
         showError.observe(viewLifecycleOwner) {
@@ -151,10 +160,14 @@ class CoinListFragment : Fragment() {
         }
 
         showLoading.observe(viewLifecycleOwner) {
+            headerTopRankAdapter.setVisibility(isVisible = false)
+            headerBuySellHoldItemAdapter.setVisibility(isVisible = false)
             binding.swReloadCoins.isRefreshing = true
         }
 
         hideLoading.observe(viewLifecycleOwner) {
+            headerTopRankAdapter.setVisibility(isVisible = true)
+            headerBuySellHoldItemAdapter.setVisibility(isVisible = true)
             binding.swReloadCoins.isRefreshing = false
         }
     }
