@@ -74,11 +74,8 @@ class CoinListFragment : Fragment() {
         lifecycleScope.launchWhenResumed {
             while (isActive) {
                 delay(INTERVAL_REFRESH_TIME)
-                binding.apply {
-                    // todo should remove?
-//                    if (rvCoinList.scrollState != RecyclerView.SCROLL_STATE_DRAGGING) {
-                        viewModel.updateCoins()
-//                    }
+                if (binding.rvCoinList.scrollState != RecyclerView.SCROLL_STATE_DRAGGING) {
+                    viewModel.updateCoins()
                 }
             }
         }
