@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "CoinListing"
-include ':app'
+include(":app")
